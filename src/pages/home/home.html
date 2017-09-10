@@ -1,17 +1,30 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Files & Folders</ion-title>
+    <ion-buttons start>
+      <button ion-button *ngIf="depth" (click)="goBack()"><ion-icon name="arrow-back"></ion-icon> Back</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-list>
+    <div *ngFor="let item of folders">
+      <ion-item *ngIf="item['.tag'] == 'folder'" (click)="openFolder(item.path_lower)">
+        <ion-thumbnail item-start>
+          <img [src]="getThumbnailUrlFromItem(item)">
+        </ion-thumbnail>
+        <h4>{{item.name}}</h4>
+        <button ion-button clear item-end>Open</button>
+      </ion-item>
+      <ion-item *ngIf="item['.tag'] == 'file'" (click)="downloadFile(item.id, item.name)">
+        <ion-thumbnail item-start>
+          <img [src]="getThumbnailUrlFromItem(item)">
+        </ion-thumbnail>
+        <h4 class="wrap">{{item.name}}</h4>
+        <p>{{item.size}} KB</p>
+        <button ion-button clear item-end>View</button>
+      </ion-item>
+    </div>
+  </ion-list>
 </ion-content>
