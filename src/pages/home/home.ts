@@ -29,7 +29,6 @@ export class HomePage {
   }
 
   loadFoldersAndFiles() {
-    //this.dropboxProvider.setAccessToken( "vlGh8cZxXvAAAAAAAAAAP2ECpsMjTyQzNih23Hd2yG2Zz0U_YCwPOQj7lb_TJgeq" );
     console.log('ACCESS TOKEN');
     console.log(this.dropboxProvider.accessToken);
     this.folders = [];
