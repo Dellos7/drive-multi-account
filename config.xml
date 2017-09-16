@@ -88,4 +88,5 @@
     <plugin name="cordova-plugin-file" spec="~4.3.3" />
     <plugin name="cordova-plugin-file-opener2" spec="~2.0.19" />
     <plugin name="cordova-plugin-inappbrowser" spec="~1.7.1" />
+    <plugin name="cordova-sqlite-storage" spec="~2.0.4" />
 </widget>

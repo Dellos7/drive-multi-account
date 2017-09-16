@@ -1,7 +1,16 @@
+import { SettingsPage } from './../pages/settings/settings';
+import { AccountsPage } from './../pages/accounts/accounts';
+import { ResetPasswordPage } from './../pages/reset-password/reset-password';
+import { SignupPage } from './../pages/signup/signup';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+
+// Import the AF2 Module
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -20,6 +29,17 @@ import { DropboxProvider } from '../providers/dropbox/dropbox';
 import { DropboxEndpoints } from '../providers/dropbox/dropbox-endpoints';
 import { FileProvider } from '../providers/file/file';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { AuthProvider } from '../providers/auth/auth';
+
+// AF2 Settings
+export const firebaseConfig = {
+  apiKey: "AIzaSyBEPkmyZ-4r2LrCadZAJkcfWpbASe3PVe4",
+  authDomain: "drivemultiaccount.firebaseapp.com",
+  databaseURL: "https://drivemultiaccount.firebaseio.com",
+  projectId: "drivemultiaccount",
+  storageBucket: "drivemultiaccount.appspot.com",
+  messagingSenderId: "968388576872"
+};
 
 @NgModule({
   declarations: [
@@ -28,12 +48,19 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    SignupPage,
+    ResetPasswordPage,
+    AccountsPage,
+    SettingsPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -42,7 +69,11 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    SignupPage,
+    ResetPasswordPage,
+    AccountsPage,
+    SettingsPage
   ],
   providers: [
     StatusBar,
@@ -53,7 +84,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     File,
     FileOpener,
     FileProvider,
-    InAppBrowser
+    InAppBrowser,
+    AuthProvider
   ]
 })
 export class AppModule {}

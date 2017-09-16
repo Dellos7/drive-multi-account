@@ -21,7 +21,16 @@ export class HomePage {
     private file: File, private fileOpener: FileOpener, private fileProvider: FileProvider) {}
 
   ionViewDidLoad() {
-    this.loadFoldersAndFiles();
+    //this.loadFoldersAndFiles();
+    //DROPBOX AUTH
+    if( window.location.hash ) {
+      let token = window.location.hash.split("=")[1].split("&")[0];
+      console.log('WINDOW HASH TOKEN: ' + token);
+      if( token ) {
+        this.dropboxProvider.setAccessToken(token);
+        //this.navCtrl.setRoot(TabsPage);
+      }
+    } 
   }
 
   ionViewDidEnter() {
@@ -45,7 +54,18 @@ export class HomePage {
         loading.dismiss();
       },
       err => {
-        console.log(err)
+        console.log(err);
+        loading.dismiss();
+        let alert = this.alertCtrl.create({
+          message: err._body,
+            buttons: [
+              {
+                text: "Ok",
+                role: 'cancel'
+              }
+            ]
+          });
+          alert.present();
       });
   }
 
